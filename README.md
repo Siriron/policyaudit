@@ -8,6 +8,7 @@
 
 <br />
 
+![CI](https://github.com/Siriron/policyaudit/actions/workflows/ci.yml/badge.svg)
 ![Status](https://img.shields.io/badge/status-building-yellow?style=flat-square)
 ![Network](https://img.shields.io/badge/network-StudioNet-blue?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)
