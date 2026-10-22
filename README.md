@@ -9,14 +9,14 @@
 <br />
 
 ![CI](https://github.com/Siriron/policyaudit/actions/workflows/ci.yml/badge.svg)
-![Status](https://img.shields.io/badge/status-building-yellow?style=flat-square)
+![Status](https://img.shields.io/badge/status-live-brightgreen?style=flat-square)
 ![Network](https://img.shields.io/badge/network-StudioNet-blue?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)
 ![Stack](https://img.shields.io/badge/stack-React%20%2B%20Vite%20%2B%20GenVM-0e7490?style=flat-square)
 
 <br />
 
-**[Documentation](./docs/architecture.md)** &nbsp;·&nbsp; **[Smart Contract](./contracts/policyaudit.py)**
+**[Live App](https://policyaudit-xyz.vercel.app/)** &nbsp;·&nbsp; **[Documentation](./docs/architecture.md)** &nbsp;·&nbsp; **[Smart Contract](./contracts/policyaudit.py)**
 
 </div>
 
@@ -87,7 +87,7 @@ A publisher states a claim about one policy file, such as "this policy forbids s
 |---|---|---|
 | StudioNet | `0x8bAAC1F6A9889a723f9e87DB3028eaC60Ed9131a` | [View](https://explorer-studio.genlayer.com/address/0x8bAAC1F6A9889a723f9e87DB3028eaC60Ed9131a) |
 
-The frontend is not deployed yet. StudioNet is a temporary test network: deployed addresses may not survive resets. The repository tests below are the proof of behavior, not the address.
+The frontend is deployed at https://policyaudit-xyz.vercel.app/. StudioNet is a temporary test network: deployed addresses may not survive resets. The repository tests below are the proof of behavior, not the address.
 
 </div>
 
@@ -146,7 +146,7 @@ LICENSE                            MIT
 
 </div>
 
-`pytest tests -q -p no:cacheprovider` runs 133 direct-mode tests that execute the real contract, and all pass. Nine deliberately planted bugs (for example the `status_code` bug, a validator that ignores the verdict, and a transfer before the balance is zeroed) were each caught by the suite. The tests mock the web and the LLM, so they do **not** prove real LLM behavior on real documents, real network behavior, or real multi-node consensus timing. The contract is deployed on StudioNet (address above), but none of these checks ran a live transaction against it, and the app has not been exercised against a live wallet; a Run and Debug pass in Studio would cover that runtime-only layer. See [`docs/deployment.md`](./docs/deployment.md) for the same statement in full.
+`pytest tests -q -p no:cacheprovider` runs 133 direct-mode tests that execute the real contract, and all pass. Nine deliberately planted bugs (for example the `status_code` bug, a validator that ignores the verdict, and a transfer before the balance is zeroed) were each caught by the suite. The tests mock the web and the LLM, so they do **not** prove real LLM behavior on real documents, real network behavior, or real multi-node consensus timing. The contract is deployed on StudioNet (address above), but none of these checks ran a live transaction against it, and the deployed app has not been exercised against a live wallet by these checks; a Run and Debug pass in Studio would cover that runtime-only layer. See [`docs/deployment.md`](./docs/deployment.md) for the same statement in full.
 
 <br />
 

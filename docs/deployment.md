@@ -1,5 +1,7 @@
 # Deployment and testing status
 
+Live app: https://policyaudit-xyz.vercel.app/
+
 ## Deploy the contract (StudioNet)
 
 1. Open GenLayer Studio, deploy `contracts/policyaudit.py` (no constructor arguments).
