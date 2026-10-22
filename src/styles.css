@@ -12,11 +12,11 @@
   }
 }
 * { box-sizing: border-box; }
-html { background: var(--paper); }
+html { background: var(--paper); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0; color: var(--ink); background: var(--paper); font: 16px/1.55 var(--sans); }
 h1, h2, h3 { font-family: var(--serif); line-height: 1.2; margin: 1.4em 0 .5em; }
 h1 { font-size: 1.9rem; margin-top: .6em; } h2 { font-size: 1.3rem; }
-a { color: var(--accent); } a:hover { text-decoration: none; }
+a { color: var(--accent); overflow-wrap: anywhere; word-break: break-all; } a:hover { text-decoration: none; }
 code, .mono { font-family: var(--mono); font-size: .88em; word-break: break-all; }
 .top { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding: .7rem max(1rem, env(safe-area-inset-left)); border-bottom: 1px solid var(--line); background: var(--card); position: sticky; top: 0; z-index: 5; }
 .brand { display: flex; align-items: center; gap: .5rem; font: 700 1.15rem var(--serif); color: var(--ink); text-decoration: none; }

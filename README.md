@@ -142,11 +142,11 @@ LICENSE                            MIT
 <div align="center">
 
 ![Tested](https://img.shields.io/badge/contract%20logic%20%28mocked%20web%20and%20LLM%29-tested-brightgreen?style=flat-square)
-![Untested](https://img.shields.io/badge/live%20deploy%20and%20real%20LLM-untested-yellow?style=flat-square)
+![Untested](https://img.shields.io/badge/SUPPORTED%2C%20INCONCLUSIVE%2C%20reclaim%20live-untested-yellow?style=flat-square)
 
 </div>
 
-`pytest tests -q -p no:cacheprovider` runs 133 direct-mode tests that execute the real contract, and all pass. Nine deliberately planted bugs (for example the `status_code` bug, a validator that ignores the verdict, and a transfer before the balance is zeroed) were each caught by the suite. The tests mock the web and the LLM, so they do **not** prove real LLM behavior on real documents, real network behavior, or real multi-node consensus timing. The contract is deployed on StudioNet (address above), but none of these checks ran a live transaction against it, and the deployed app has not been exercised against a live wallet by these checks; a Run and Debug pass in Studio would cover that runtime-only layer. See [`docs/deployment.md`](./docs/deployment.md) for the same statement in full.
+`pytest tests -q -p no:cacheprovider` runs 133 direct-mode tests that execute the real contract, and all pass. Nine deliberately planted bugs (for example the `status_code` bug, a validator that ignores the verdict, and a transfer before the balance is zeroed) were each caught by the suite. The tests mock the web and the LLM, so they do **not** prove real LLM behavior on real documents, real network behavior, or real multi-node consensus timing. The contract is deployed on StudioNet (address above). One scenario (DISPUTED: post, challenge, evaluate, withdraw) was run by hand on the live deployment with two wallets and ended as expected; that run is reported, not reproducible from this repository, and SUPPORTED, INCONCLUSIVE and reclaim have not been run live. See [`docs/deployment.md`](./docs/deployment.md) for the same statement in full.
 
 <br />
 

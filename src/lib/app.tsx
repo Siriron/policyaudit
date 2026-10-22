@@ -11,6 +11,8 @@ interface WalletCtx {
   error: string
 }
 const Wallet = createContext<WalletCtx>({ account: null, connect: async () => {}, error: '' })
+const RESEND_GUARD_MS = 90_000
+
 export const useWallet = () => useContext(Wallet)
 
 // ---------------------------------------------------------------- one write in flight at a time
@@ -58,11 +60,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  const recentlyAccepted = useRef(new Map<string, number>())
   const busy = report.phase === 'signing' || report.phase === 'pending'
 
   const run: TxCtx['run'] = useCallback(async (label, fn, args, value, onProvisional) => {
     if (!account) {
       const r: TxReport = { phase: 'failed', message: 'Connect a wallet first.' }
+      setReport(r); setAction(label)
+      return r
+    }
+    const sentAt = recentlyAccepted.current.get(label)
+    if (sentAt && Date.now() - sentAt < RESEND_GUARD_MS) {
+      // The same write was accepted moments ago. The chain state may not show it yet; a second send would only revert.
+      const r: TxReport = { phase: 'failed', message: 'This write was just accepted. Wait a few seconds and refresh before sending it again.' }
       setReport(r); setAction(label)
       return r
     }
@@ -77,7 +87,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       execution: result.execution ?? '', hash: result.hash ?? '', message: result.message ?? '',
     })
     if (result.phase === 'provisional') {
+      recentlyAccepted.current.set(label, Date.now())
       onProvisional?.()
+      // Reads can lag the accepted state; refresh again shortly so the buttons reflect the chain.
+      if (onProvisional) for (const ms of [8000, 20000]) setTimeout(() => { if (alive.current) onProvisional() }, ms)
       // Accepted is not final. Keep watching (slowly) so the panel can say when it is.
       if (result.hash) {
         waitFinalized(result.hash).then(done => {
