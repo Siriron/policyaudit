@@ -483,7 +483,7 @@ class PolicyAudit(gl.Contract):
         scenario_text = str(c.scenario)
 
         # Bug 6: nested functions, zero `self.` anywhere inside.
-        def leader_fn():
+        def leader_fn() -> dict:
             ok, text = _fetch_evidence(url)
             if not ok:
                 return {"verdict": INCONCLUSIVE, "note": text}
